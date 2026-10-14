@@ -82,7 +82,7 @@ function botInput(W) {
   // 3. timed hazards — predictive
   const near = dangersAt(L, W.t, cx - 40, cx + 320).length > 0 || L.husks.some(h => Math.abs(huskX(h, W.t) - cx) < 320);
   if (near) {
-    if (B.wantDie > 0 && dangersAt(L, W.t, cx - 40, cx + 140).length) { /* deliberately reckless (reel) */ inp.right = true; return inp; }
+    if (B.wantDie > 0) { /* deliberately reckless (reel) */ inp.right = true; return inp; }
     if (predictSafe(W, 'run', 0.9)) { inp.right = true; }
     else if (g && predictSafe(W, 'jump', 0.9)) { inp.right = true; doJump(); B.why = 'pjump'; return inp; }
     else if (predictSafe(W, 'wait', 0.9)) { inp.right = false; return inp; }

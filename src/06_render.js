@@ -528,6 +528,7 @@ class Renderer {
     const p = W.p, VW = this.VW / this.Z, VH = this.VH / this.Z;
     const look = clamp(p.vx * 0.35, -90, 90);
     const tx = p.x + PHYS.PW / 2 - VW * (VW > VH ? 0.4 : 0.3) + look;
+    if (snap) this.lastGy = p.y + PHYS.PH;
     let gy = p.ground ? p.y + PHYS.PH : (this.lastGy || p.y + PHYS.PH);
     if (p.ground) this.lastGy = gy;
     if (!p.ground && p.y + PHYS.PH > gy + 60) gy = p.y + PHYS.PH;

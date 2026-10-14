@@ -1,0 +1,47 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 2160
+PlayResY: 3840
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,UJ SemiBold,112,&H00F2F4F5,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,2,0,1,0,8,2,160,160,980,1
+Style: Big,US Black,420,&H00F2F4F5,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,30,0,1,0,10,2,100,100,900,1
+Style: Title,US Black,500,&H00EDF1F3,&H00FFFFFF,&H00000000,&HA0000000,0,0,0,0,100,100,40,0,1,0,14,8,100,100,330,1
+Style: Sub,UJ Light Italic,92,&H00D8DCDE,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,22,0,1,0,6,8,100,100,880,1
+Style: Head,UJ Bold,96,&H00F2F4F5,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,26,0,1,0,6,2,100,100,1260,1
+Style: Tag,UJ SemiBold,52,&H00C8CCCE,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,10,0,1,0,4,8,100,100,240,1
+Style: Small,UJ SemiBold,62,&H00B4B8BA,&H00FFFFFF,&H00000000,&H90000000,0,0,0,0,100,100,12,0,1,0,4,2,100,100,620,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:05.45,0:00:09.65,Tag,,0,0,0,,{\fad(260,260)}CHAPTER I  ·  THE WHISPERING WOOD
+Dialogue: 0,0:00:10.05,0:00:14.65,Tag,,0,0,0,,{\fad(260,260)}CHAPTER I  ·  THE WHISPERING WOOD
+Dialogue: 0,0:00:15.05,0:00:21.05,Tag,,0,0,0,,{\fad(260,260)}CHAPTER III  ·  THE HOLLOW CITY
+Dialogue: 0,0:00:21.45,0:00:27.05,Tag,,0,0,0,,{\fad(260,260)}CHAPTER IV  ·  THE IRON MILL
+Dialogue: 0,0:00:27.45,0:00:33.25,Tag,,0,0,0,,{\fad(260,260)}CHAPTER II  ·  THE DROWNED MARSH
+Dialogue: 0,0:00:33.65,0:00:39.25,Tag,,0,0,0,,{\fad(260,260)}CHAPTER V  ·  THE PALE EDGE
+Dialogue: 0,0:00:39.65,0:00:44.05,Tag,,0,0,0,,{\fad(260,260)}CHAPTER II  ·  THE DARK RISES
+Dialogue: 0,0:00:00.15,0:00:05.00,Title,,0,0,0,,{\fad(500,400)}UMBRAL
+Dialogue: 0,0:00:00.60,0:00:05.00,Sub,,0,0,0,,{\fad(700,400)}THE LAST LANTERN
+Dialogue: 0,0:00:00.70,0:00:02.90,Cap,,0,0,0,,{\fad(260,260)}When the Great Lantern fell,\Nthe world forgot its colour.
+Dialogue: 0,0:00:02.90,0:00:05.00,Cap,,0,0,0,,{\fad(260,260)}Wren carries its last ember.
+Dialogue: 0,0:00:05.40,0:00:09.70,Head,,0,0,0,,{\fad(260,260)}HOW TO PLAY
+Dialogue: 0,0:00:05.50,0:00:07.60,Cap,,0,0,0,,{\fad(260,260)}← →  to walk\N SPACE  to jump
+Dialogue: 0,0:00:07.60,0:00:09.70,Cap,,0,0,0,,{\fad(260,260)}Thorns, traps and pits\Nend you instantly.
+Dialogue: 0,0:00:10.00,0:00:14.70,Cap,,0,0,0,,{\fad(260,260)}Walk into crates to push them,\Nthen climb what you can't reach.
+Dialogue: 0,0:00:15.00,0:00:17.80,Cap,,0,0,0,,{\fad(260,260)}Press  E  to pull levers\Nand open the gates.
+Dialogue: 0,0:00:17.80,0:00:21.10,Cap,,0,0,0,,{\fad(260,260)}Crushers move in rhythm.\NWatch, then run.
+Dialogue: 0,0:00:21.40,0:00:23.80,Cap,,0,0,0,,{\fad(260,260)}One mistake\Nand the dark takes you…
+Dialogue: 0,0:00:23.90,0:00:27.10,Cap,,0,0,0,,{\fad(260,260)}…but you always rise again\Nat the last safe ground.
+Dialogue: 0,0:00:27.40,0:00:30.20,Cap,,0,0,0,,{\fad(260,260)}Leap the drowned marsh.
+Dialogue: 0,0:00:30.20,0:00:33.30,Cap,,0,0,0,,{\fad(260,260)}Jump over the Husks.\NThey only want your light.
+Dialogue: 0,0:00:33.60,0:00:39.30,Cap,,0,0,0,,{\fad(260,260)}Ride the drifting stones\Nat the edge of the world.
+Dialogue: 0,0:00:39.60,0:00:41.80,Cap,,0,0,0,,{\fad(260,260)}And when the Dark\Ncomes for you…
+Dialogue: 0,0:00:41.80,0:00:44.10,Big,,0,0,0,,{\fad(260,260)}RUN.
+Dialogue: 0,0:00:44.60,0:00:48.80,Title,,0,0,0,,{\fad(600,0)}UMBRAL
+Dialogue: 0,0:00:45.10,0:00:48.80,Sub,,0,0,0,,{\fad(600,0)}THE LAST LANTERN
+Dialogue: 0,0:00:45.50,0:00:48.80,Cap,,0,0,0,,{\fad(500,0)}100 levels  ·  5 chapters\None story
+Dialogue: 0,0:00:46.30,0:00:48.80,Small,,0,0,0,,{\fad(500,0)}FREE  ·  PLAYS IN YOUR BROWSER\NKEYBOARD  ·  GAMEPAD  ·  TOUCH

@@ -19,33 +19,34 @@ TAGS = {'intro': 'CHAPTER I  ·  THE WHISPERING WOOD', 'jump': 'CHAPTER I  ·  T
         'edge': 'CHAPTER V  ·  THE PALE EDGE', 'chase': 'CHAPTER II  ·  THE DARK RISES'}
 for k, v in TAGS.items():
     if k == 'intro': continue
-    end = {m['id']: i for i, m in enumerate(ev['marks'])}
-    add(k, 0.25, 9.0 if k != 'chase' else 4.6, 'Tag', v)
+    ids = [m['id'] for m in ev['marks']]; i = ids.index(k)
+    nxt = ev['marks'][i + 1]['T'] if i + 1 < len(ids) else DUR
+    add(k, 0.25, nxt - marks[k] - 0.15, 'Tag', v)
 
 # intro
 add('intro', 0.15, 5.0, 'Title', 'UMBRAL', r"{\fad(500,400)}")
 add('intro', 0.6, 5.0, 'Sub', 'THE LAST LANTERN', r"{\fad(700,400)}")
-add('intro', 0.7, 2.9, 'Cap', 'When the Great Lantern fell,\Nthe world forgot its colour.')
+add('intro', 0.7, 2.9, 'Cap', 'When the Great Lantern fell,\\Nthe world forgot its colour.')
 add('intro', 2.9, 5.0, 'Cap', 'Wren carries its last ember.')
 # how to play
 add('jump', 0.2, 4.5, 'Head', 'HOW TO PLAY')
-add('jump', 0.3, 2.4, 'Cap', '← →  to walk\N SPACE  to jump')
-add('jump', 2.4, 4.5, 'Cap', 'Thorns, traps and pits\Nend you instantly.')
-add('crate', 0.2, 4.9, 'Cap', 'Walk into crates to push them,\Nthen climb what you can\'t reach.')
-add('lever', 0.2, 3.0, 'Cap', 'Press  E  to pull levers\Nand open the gates.')
-add('lever', 3.0, 6.3, 'Cap', 'Crushers move in rhythm.\NWatch, then run.')
-add('die', 0.2, 2.6, 'Cap', 'One mistake\Nand the dark takes you…')
-add('die', 2.7, 5.9, 'Cap', '…but you always rise again\Nat the last safe ground.')
+add('jump', 0.3, 2.4, 'Cap', '← →  to walk\\N SPACE  to jump')
+add('jump', 2.4, 4.5, 'Cap', 'Thorns, traps and pits\\Nend you instantly.')
+add('crate', 0.2, 4.9, 'Cap', 'Walk into crates to push them,\\Nthen climb what you can\'t reach.')
+add('lever', 0.2, 3.0, 'Cap', 'Press  E  to pull levers\\Nand open the gates.')
+add('lever', 3.0, 6.3, 'Cap', 'Crushers move in rhythm.\\NWatch, then run.')
+add('die', 0.2, 2.6, 'Cap', 'One mistake\\Nand the dark takes you…')
+add('die', 2.7, 5.9, 'Cap', '…but you always rise again\\Nat the last safe ground.')
 add('marsh', 0.2, 3.0, 'Cap', 'Leap the drowned marsh.')
-add('marsh', 3.0, 6.1, 'Cap', 'Jump over the Husks.\NThey only want your light.')
-add('edge', 0.2, 5.9, 'Cap', 'Ride the drifting stones\Nat the edge of the world.')
-add('chase', 0.2, 2.4, 'Cap', 'And when the Dark\Ncomes for you…')
+add('marsh', 3.0, 6.1, 'Cap', 'Jump over the Husks.\\NThey only want your light.')
+add('edge', 0.2, 5.9, 'Cap', 'Ride the drifting stones\\Nat the edge of the world.')
+add('chase', 0.2, 2.4, 'Cap', 'And when the Dark\\Ncomes for you…')
 add('chase', 2.4, 4.7, 'Big', 'RUN.')
 # end card
 add('end', 0.4, 4.6, 'Title', 'UMBRAL', r"{\fad(600,0)}")
 add('end', 0.9, 4.6, 'Sub', 'THE LAST LANTERN', r"{\fad(600,0)}")
-add('end', 1.3, 4.6, 'Cap', '100 levels  ·  5 chapters\None story', r"{\fad(500,0)}")
-add('end', 2.1, 4.6, 'Small', 'FREE  ·  PLAYS IN YOUR BROWSER\NKEYBOARD  ·  GAMEPAD  ·  TOUCH', r"{\fad(500,0)}")
+add('end', 1.3, 4.6, 'Cap', '100 levels  ·  5 chapters\\None story', r"{\fad(500,0)}")
+add('end', 2.1, 4.6, 'Small', 'FREE  ·  PLAYS IN YOUR BROWSER\\NKEYBOARD  ·  GAMEPAD  ·  TOUCH', r"{\fad(500,0)}")
 
 head = """[Script Info]
 ScriptType: v4.00+
