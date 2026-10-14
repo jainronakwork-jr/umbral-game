@@ -1,0 +1,142 @@
+<title>Umbral: The Last Lantern</title>
+<meta name="description" content="Umbral — an atmospheric black-and-white puzzle platformer. 100 levels, 5 chapters, one lantern.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@800;900&family=Josefin+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap">
+<style>
+/* Layout: one full-bleed 16:9 stage, letterboxed in ink; menus float as quiet text over the living world. */
+:root {
+  --ink: #050505; --paper: #e9e7e0; --ash: #9b9992; --smoke: #4a4945; --glow: #fff8e6;
+  --display: "Big Shoulders Stencil Display", "Impact", "Arial Narrow", sans-serif;
+  --body: "Josefin Sans", "Futura", "Trebuchet MS", sans-serif;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { margin: 0; background: var(--ink); color: var(--paper); font-family: var(--body); overflow: hidden; user-select: none; -webkit-user-select: none; touch-action: none;
+  padding-left: max(0px, env(safe-area-inset-left, 0px)); padding-right: max(0px, env(safe-area-inset-right, 0px)); }
+#stage { position: relative; width: 100%; height: 100%; display: grid; place-items: center; }
+#frame { position: relative; width: min(100vw, calc(100vh * 16 / 9)); width: min(100%, calc(100dvh * 16 / 9)); aspect-ratio: 16 / 9; max-width: 100%; }
+#game { width: 100%; height: 100%; display: block; background: var(--ink); }
+.panel { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding-block: 4%; padding-left: max(6%, env(safe-area-inset-left, 0px)); padding-right: max(6%, env(safe-area-inset-right, 0px)); gap: 1.6em; }
+.panel.hidden, .hidden { display: none !important; }
+#menu { align-items: flex-start; background: linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.15) 55%, transparent); }
+h1 { font-family: var(--display); font-weight: 900; font-size: clamp(56px, 13vw, 168px); line-height: .82; letter-spacing: .04em; margin: 0; color: var(--paper);
+  text-shadow: 0 0 40px rgba(255,248,230,.25); }
+.sub { font-weight: 300; font-style: italic; letter-spacing: .08em; font-size: clamp(13px, 1.6vw, 20px); color: var(--ash); margin: -0.4em 0 0.6em; }
+nav { display: flex; flex-direction: column; gap: .35em; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+nav button, .row button, .back { font-size: clamp(14px, 1.7vw, 21px); letter-spacing: .32em; text-transform: uppercase; font-weight: 600; text-align: left; padding: .35em 0; color: var(--ash); transition: color .25s, letter-spacing .35s; }
+nav button:hover, nav button:focus-visible, .back:hover, .back:focus-visible, .row button:hover { color: var(--glow); letter-spacing: .4em; outline: none; }
+nav button::before { content: ""; display: inline-block; width: 0; height: 2px; background: var(--glow); vertical-align: middle; margin-right: 0; transition: width .3s, margin .3s; }
+nav button:hover::before, nav button:focus-visible::before { width: 1.4em; margin-right: .6em; }
+.foot { position: absolute; bottom: 4%; left: 6%; right: 6%; display: flex; justify-content: space-between; gap: 1em; flex-wrap: wrap; font-size: clamp(10px, 1.1vw, 13px); letter-spacing: .2em; text-transform: uppercase; color: var(--smoke); }
+.dim { background: rgba(0,0,0,.8); }
+h2 { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 5vw, 64px); letter-spacing: .06em; margin: 0; }
+#chapters { justify-content: flex-start; overflow-y: auto; }
+#chapter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.6em 2.4em; }
+#chapter-grid h3 { font-weight: 600; letter-spacing: .2em; text-transform: uppercase; font-size: 13px; color: var(--ash); margin: 0 0 .7em; display: flex; gap: .8em; align-items: baseline; }
+#chapter-grid h3 span { font-family: var(--display); font-size: 26px; color: var(--paper); letter-spacing: .05em; }
+.lv { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+.lv button { aspect-ratio: 1; font-size: 12px; font-variant-numeric: tabular-nums; color: var(--paper); border: 1px solid var(--smoke); }
+.lv button:hover:not(:disabled), .lv button:focus-visible { background: var(--paper); color: var(--ink); outline: none; }
+.lv button:disabled { color: #2a2a28; border-color: #1c1c1a; cursor: default; }
+.lv button.lit { box-shadow: inset 0 -3px 0 var(--glow); }
+.lv button.boss { border-color: var(--ash); }
+.how { display: grid; grid-template-columns: max-content 1fr; gap: .7em 2em; font-size: clamp(13px, 1.5vw, 18px); max-width: 44em; }
+.how kbd { font-family: var(--body); font-weight: 700; letter-spacing: .12em; border: 1px solid var(--smoke); padding: .15em .5em; margin-right: .3em; font-size: .85em; }
+.how p { margin: 0; color: var(--ash); font-weight: 300; }
+.vol { display: grid; grid-template-columns: 8em 1fr; gap: 1em 1.5em; align-items: center; max-width: 34em; letter-spacing: .2em; text-transform: uppercase; font-size: 14px; color: var(--ash); }
+input[type=range] { accent-color: var(--paper); width: 100%; }
+#ending { align-items: center; text-align: center; justify-content: flex-end; padding-block: 6%; }
+#ending p { color: #3a3934; letter-spacing: .2em; text-transform: uppercase; font-size: 13px; margin: 0; }
+#ending .back { color: #1c1b18; text-align: center; }
+#pausebtn { position: absolute; top: 2.5%; right: 2%; width: 40px; height: 40px; opacity: .35; display: none; }
+#pausebtn::before, #pausebtn::after { content: ""; position: absolute; top: 11px; width: 5px; height: 18px; background: var(--ink); }
+#pausebtn::before { left: 13px; } #pausebtn::after { right: 13px; }
+body.playing #pausebtn { display: block; }
+#touch { display: none; position: absolute; inset: auto 0 0 0; height: 0; }
+body.touch.playing #touch { display: block; }
+#touch button { position: fixed; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); width: 74px; height: 74px; border-radius: 50%; border: 2px solid rgba(233,231,224,.35); background: rgba(0,0,0,.25); color: rgba(233,231,224,.75); font-weight: 700; letter-spacing: .1em; font-size: 12px; }
+#touch button.on { background: rgba(255,248,230,.35); }
+#touch [data-touch=left] { left: calc(18px + env(safe-area-inset-left, 0px)); }
+#touch [data-touch=right] { left: calc(106px + env(safe-area-inset-left, 0px)); }
+#touch [data-touch=act] { right: calc(110px + env(safe-area-inset-right, 0px)); width: 62px; height: 62px; }
+#touch [data-touch=jump] { right: calc(18px + env(safe-area-inset-right, 0px)); width: 84px; height: 84px; }
+body.reel #stage { display: block; } body.reel #frame { width: auto; aspect-ratio: auto; }
+body.reel .panel, body.reel #pausebtn { display: none !important; }
+@media (prefers-reduced-motion: reduce) { nav button, nav button::before { transition: none; } }
+@media (max-width: 700px) { .how { grid-template-columns: 1fr; gap: .3em; } .foot { display: none; } }
+</style>
+
+<div id="stage"><div id="frame">
+  <canvas id="game" width="1280" height="720" aria-label="Umbral game view"></canvas>
+
+  <section class="panel" id="menu">
+    <h1>UMBRAL</h1>
+    <p class="sub">The Last Lantern</p>
+    <nav>
+      <button id="btn-continue">Continue</button>
+      <button id="btn-new">New Journey</button>
+      <button id="btn-chapters">Chapters</button>
+      <button id="btn-how">How to Play</button>
+      <button id="btn-settings">Sound</button>
+    </nav>
+    <div class="foot"><span>100 levels · 5 chapters</span><span>Headphones recommended</span></div>
+  </section>
+
+  <section class="panel dim hidden" id="pause">
+    <h2>Paused</h2>
+    <nav>
+      <button id="btn-resume">Resume</button>
+      <button id="btn-restart">Back to checkpoint</button>
+      <button id="btn-pchapters">Chapters</button>
+      <button id="btn-psettings">Sound</button>
+      <button id="btn-quit">Title screen</button>
+    </nav>
+  </section>
+
+  <section class="panel dim hidden" id="chapters">
+    <h2>Chapters</h2>
+    <div id="chapter-grid"></div>
+    <button class="back">← Back</button>
+  </section>
+
+  <section class="panel dim hidden" id="how">
+    <h2>How to Play</h2>
+    <div class="how">
+      <span><kbd>←</kbd><kbd>→</kbd> or <kbd>A</kbd><kbd>D</kbd></span><p>Walk. Walk into crates to push them.</p>
+      <span><kbd>Space</kbd> or <kbd>W</kbd></span><p>Jump. Hold for a higher jump.</p>
+      <span><kbd>E</kbd> or <kbd>↓</kbd></span><p>Pull levers.</p>
+      <span><kbd>Esc</kbd></span><p>Pause.</p>
+      <span>Gamepad</span><p>Stick to walk, A to jump, X to pull. On phones, use the on-screen buttons.</p>
+      <span>The rules</span><p>Thorns, traps, water, blades and falling stones end you at once. You return to the last place you stood safely. Crushers and saws move in rhythm, so watch before you run. When the Dark gives chase, do not stop.</p>
+    </div>
+    <button class="back">← Back</button>
+  </section>
+
+  <section class="panel dim hidden" id="settings">
+    <h2>Sound</h2>
+    <div class="vol">
+      <label for="vol-master">Master</label><input id="vol-master" type="range" min="0" max="1" step="0.05">
+      <label for="vol-music">Music</label><input id="vol-music" type="range" min="0" max="1" step="0.05">
+      <label for="vol-sfx">Effects</label><input id="vol-sfx" type="range" min="0" max="1" step="0.05">
+    </div>
+    <button class="back">← Back</button>
+  </section>
+
+  <section class="panel hidden" id="ending">
+    <p id="end-stats"></p>
+    <button class="back" id="btn-end">Return to the title</button>
+  </section>
+
+  <button id="pausebtn" aria-label="Pause"></button>
+  <div id="touch">
+    <button data-touch="left" aria-label="Walk left">◀</button>
+    <button data-touch="right" aria-label="Walk right">▶</button>
+    <button data-touch="act" aria-label="Pull">GRAB</button>
+    <button data-touch="jump" aria-label="Jump">JUMP</button>
+  </div>
+</div></div>
+<script>
+/*__GAME__*/
+if (window.TOUCH) document.body.classList.add('touch');
+</script>
